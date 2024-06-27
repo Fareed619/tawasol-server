@@ -1,0 +1,4 @@
+# we put here files and folder that we need to ignore them (send all the codes expect files that here)
+
+
+/node_modules

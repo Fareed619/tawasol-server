@@ -1,8 +1,24 @@
 const express = require("express");
 
+const connectDB = require("./config/db")
+
 const app = express();
+app.use(express.json())
+
 // The port that i working on it
 const PORT = process.env.PORT || 5000 ;
+
+
+
+app.use("/api/users", require("./routes/users"));
+app.use("/api/posts", require("./routes/posts"));
+app.use("/api/profiles", require("./routes/profiles"));
+
+
+
+
+
+
 
 
 
@@ -13,6 +29,7 @@ app.get("/", (req, res)=> {
     res.send("the server is working")
 })
 
+connectDB();
 
 
 

@@ -9,7 +9,9 @@ const config = require("config");
 
 
 /*
-register api  post request => url = http:localhost:5000/api/users/regiter
+ ***  REGISTER ***
+ POST  Path => /api/users/register
+ public
 
 */
 
@@ -77,7 +79,9 @@ router.post("/register",
 
 
 /*
-login api post request = >> url = http:localhost:5000/api/users/login
+**** LOGIN ****
+POST Path => /api/users/login
+ punlic
 */
 
 router.post("/login",
@@ -130,8 +134,54 @@ router.post("/login",
 
                 }
 
+});
+
+
+/*
+*** RECIVE TOKEN ***** 
+GET  path => /api/users
+private
+
+*/
+const auth =  (req, res, next) => {
+    // get token from header request
+    const token = req.header("x-auth-token");
+
+    if(!token){
+        return res.status(401).json({msg : "Token is not available, authorization denied."})
+    };
+
+    try{
+        jwt.verify(token, config.get("jwtSecret"), (error, decoded) => {
+            if(error){
+                return res.status(401).json({msg: "Token is not valid , unauthorized."})
+            }
+            else{
+                req.user = decoded.user ;
+                next()
+
+            }
+        })
+
+    }catch(err){
+        console.error(err.message)
+        res.json({msg:err.message})
+    }
+
+
+}
+
+router.get("/", auth, async(req, res) => {
+
+    try{
+        const user= await User.findById(req.user.id).select("-password");
+        res.json(user)
+
+    }catch(err){
+        console.error(err.message)
+        res.status(500).send(err.message)
+    }
+
 })
-
-
 
 module.exports = router;

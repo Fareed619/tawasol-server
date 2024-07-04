@@ -5,6 +5,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const { auth } = require("../utiltis");
 
 
 
@@ -51,7 +52,7 @@ router.post("/register",
         // jwt 
 
         const payLoad = {
-            user: {
+            userPayload: {
                 id : user.id 
             }
         };
@@ -108,7 +109,7 @@ router.post("/login",
                     }
 
                     const payLoad = {
-                        user : {
+                        userPayload : {
                             id: user.id
                         }
                     };
@@ -143,33 +144,6 @@ GET  path => /api/users
 private
 
 */
-const auth =  (req, res, next) => {
-    // get token from header request
-    const token = req.header("x-auth-token");
-
-    if(!token){
-        return res.status(401).json({msg : "Token is not available, authorization denied."})
-    };
-
-    try{
-        jwt.verify(token, config.get("jwtSecret"), (error, decoded) => {
-            if(error){
-                return res.status(401).json({msg: "Token is not valid , unauthorized."})
-            }
-            else{
-                req.user = decoded.user ;
-                next()
-
-            }
-        })
-
-    }catch(err){
-        console.error(err.message)
-        res.json({msg:err.message})
-    }
-
-
-}
 
 router.get("/", auth, async(req, res) => {
 

@@ -4,14 +4,17 @@
   "description": "social media app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "start": "node server.js",
+    "client": "npm start --prefix ../client",
+    "dev": "concurrently \"npm:server\"  \"npm:client\""
   },
   "author": "fareed deeb",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.12",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
     "jsonwebtoken": "^9.0.2",

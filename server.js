@@ -1,9 +1,11 @@
 const express = require("express");
 
 const connectDB = require("./config/db")
+const cors = require("cors");
 
 const app = express();
 app.use(express.json())
+app.use(cors())
 
 // The port that i working on it
 const PORT = process.env.PORT || 5000 ;

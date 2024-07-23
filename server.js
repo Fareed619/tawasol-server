@@ -18,6 +18,9 @@ app.use("/api/profiles", require("./routes/profiles"));
 
 
 
+app.use(express.static(__dirname + "/public"))  // To allow client to access on public folder
+
+
 
 
 

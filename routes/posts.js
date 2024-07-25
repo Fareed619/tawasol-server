@@ -86,18 +86,19 @@ router.put("/like/:id", auth, async(req, res) => {
 
     try{
         const ID = req.params.id ;
+        console.log("ID", ID)
         const postModel = await Post.findById(ID);
         if(postModel.likes.some(like => like.user.toString() === req.user.id)){
             return res.status(400).json({msg: "Post already liked"})
 
         }
 
-    //    console.log("PostModel befor" ,postModel.likes)
+       console.log("PostModel befor" ,postModel.likes)
 
         postModel.likes.unshift({user: req.user.id});
         
 
-    //    console.log("PostModel after" ,postModel.likes)
+       console.log("PostModel after" ,postModel.likes)
 
 
         await postModel.save();

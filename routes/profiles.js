@@ -135,6 +135,7 @@ router.delete("/", auth, async (req, res) => {
       User.findOneAndDelete({ _id: req.user.id }),
     ]);
 
+    
     res.json({ msg: "User information is deleted successfuly" });
   } catch (err) {
     console.log(err.message);

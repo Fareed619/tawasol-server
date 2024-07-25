@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "social media app",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "server": "nodemon server.js",
     "start": "node server.js",

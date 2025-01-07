@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-const config = require("config");
 const multer = require("multer");
+require("dotenv").config();
 
 const auth = (req, res, next) => {
   // get token from header request
@@ -13,7 +13,7 @@ const auth = (req, res, next) => {
   }
 
   try {
-    jwt.verify(token, config.get("jwtSecret"), (error, decoded) => {
+    jwt.verify(token, process.env.JWTSECRET, (error, decoded) => {
       if (error) {
         return res
           .status(401)

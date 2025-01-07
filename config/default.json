@@ -1,4 +1,0 @@
-{
-    "mongoConnectionString" : "mongodb+srv://fareed722:fareed7221999@cluster0.tz9esxi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-    "jwtSecret" : "fareedjwt1098jduenc"
-}
